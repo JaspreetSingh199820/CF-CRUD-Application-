@@ -10,7 +10,17 @@ export const specific_user = async (req: Request): Response => {
     try{
         const body: any = await req.json();
         const conn = connect(config)
-        if (body.hasOwnProperty("email")) {
+        let results = ""
+        if (Object.keys(body).length === 0){
+            results = "Request is empty"
+            return new Response(
+                JSON.stringify({
+                    results: results,
+                    operation : 'create user',
+                }), {
+                headers: { 'content-type': 'application/json' }
+            })
+        } else if (body.hasOwnProperty("email")) {
             const results = await conn.execute('SELECT * FROM users_details WHERE EMAIL = ?', [body.email])
             return new Response(
                 JSON.stringify({
@@ -31,7 +41,7 @@ export const specific_user = async (req: Request): Response => {
     } catch(err) {
         return new Response(
             JSON.stringify({
-                error: "PLease Verify If Your Request is in correct format",
+                error: "Something wrong happend. Please try again later.",
                 operation: "Get User"
             }), {
             headers: { 'content-type': 'application/json' }
