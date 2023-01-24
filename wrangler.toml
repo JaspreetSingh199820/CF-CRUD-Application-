@@ -1,6 +1,6 @@
 name = "backend"
 main = "src/index.ts"
 
-account_id = "d370bc981fd9c35828ae099ffdd24b7f"
+account_id = ""
 workers_dev = true
 compatibility_date = "2023-01-19"
